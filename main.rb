@@ -36,8 +36,24 @@ get '/poster_titles' do
 end
 
 get '/poster_details/:id' do
+  
+  db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'medical_conference_app'})
+  results = db.exec("SELECT * FROM posters WHERE id= '#{params['id']}';")
+  db.close
 
+  erb :poster_details, locals: { posters: results[0] }
+end
 
+get '/posters/upload' do 
+  erb :new;
+end
+
+post '/' do
+  db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'medical_conference_app'})
+  db.exec("insert into posters (title, presentation_url, authors) values ('#{params["title"]}', '#{params["presentation_url"]}', '#{params["authors"]}');")
+  db.close
+
+  redirect "/"
 end
 
 
