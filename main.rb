@@ -1,7 +1,7 @@
      
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'pry'
+require 'pry' if development?
 require 'pg'
 
 
@@ -18,7 +18,7 @@ end
 
 get '/poster_titles' do
   # pull titles from database 
-  db = PG.connect(dbname: 'medical_conference_app')
+  db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'medical_conference_app'})
   results = db.exec("SELECT id, title FROM posters;")
   db.close
   
@@ -32,6 +32,11 @@ get '/poster_titles' do
     counter += 1
   end
   erb :poster_titles, locals: { titles: title_id_array}
+
+end
+
+get '/poster_details/:id' do
+
 
 end
 
