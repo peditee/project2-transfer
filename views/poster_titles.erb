@@ -1,0 +1,13 @@
+Conference Submissions 
+
+
+<ul>
+<% titles.each do |poster_name| %>
+  <a href="/poster_details/?">
+    <li><%= poster_name["title"] %> </li> 
+    <li><%= poster_name["id"] %></li>
+  </a>   
+<% end %>
+</ul>
+
+  
