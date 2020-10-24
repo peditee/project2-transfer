@@ -2,9 +2,26 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pry' if development?
+also_reload 'db/data_access'
 require 'pg'
+require 'bcrypt'
+
+require_relative 'public/db/data_access.rb'  
+
+enable :sessions 
+
+def logged_in?()
+  if session[:user_id]
+    true
+  else 
+    false
+  end 
+end
 
 
+def current_user()
+  find_user_by_id(session[:user_id])
+end
 
 get '/' do
   erb :index
@@ -15,6 +32,8 @@ end
 get '/logged_in' do
   erb :welcome
 end
+
+
 
 get '/poster_titles' do
   # pull titles from database 
@@ -56,4 +75,39 @@ post '/' do
   redirect "/"
 end
 
+post '/login' do
+  user = find_user_by_email(params['email'])
+  if BCrypt::Password.new(user['password_digest']).==(params['password'])   #assume says " BCrypt has user provided correct password?"
+    session[:user_id] = user['id'] #logging the user in 
+    redirect '/logged_in'
+  else 
+   erb :login
+    
+  end
+end
 
+delete '/logout' do
+  #destory the session 
+  session[:user_id] = nil 
+  redirect '/'
+end
+
+get '/sign-up' do
+  erb :sign_up
+
+end
+
+post '/create_profile' do
+  first_name = params['first_name']
+  surname = params['surname']
+  email = params['email']
+  password_digest = BCrypt::Password.create(params['password'])
+    
+  sql = "INSERT INTO users (first_name, surname, email, password_digest) VALUES ('#{first_name}', '#{surname}', '#{email}', '#{password_digest.to_s}');"
+  run_sql(sql)
+
+  user = find_user_by_email(email)
+  
+  session[:user_id] = user['id']
+  redirect '/logged_in'
+end

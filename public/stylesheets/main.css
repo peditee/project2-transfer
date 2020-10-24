@@ -1,4 +1,18 @@
 body {
-  background-color: aquamarine;
+  background-color: cornflowerblue;
   font: sans-serif;
+  text-align: center;
 }
+
+.heading {
+  background-color: white;
+}
+form {
+  text-align: left;
+}
+
+.dynamic-data {
+  text-align: left;
+}
+
+

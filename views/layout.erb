@@ -7,10 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Medical Conference Viewer</h1>
-<h2>Showcase Your Research</h2>
+ <div class= "heading">
+  <h1>Medical Conference Viewer</h1>
+  <h2>Showcase Your Research</h2>
+ </div>
 
-  <%= yield %>
+<div class="dynamic-data">
+ <%=  %>
+  <% if logged_in? %>
+  logged in as <%= current_user()['first_name'] %> <%= current_user()['surname']%>
 
+
+    <form action="/logout" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button> logout </button>
+    </form>
+  <% end %>
+</div>
+ 
+<%= yield %>
 </body>
 </html>
