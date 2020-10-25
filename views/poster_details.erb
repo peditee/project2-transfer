@@ -1,4 +1,10 @@
 <body>
+  <form action="/posters/<%= posters['id'] %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button>delete</button>
+  </form>
+
   <h1><%= posters['title']%></h1>
+  
   <img src="<%= posters['presentation_url'] %>"%>
 </body>

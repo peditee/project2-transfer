@@ -1,10 +1,10 @@
-Conference Submissions 
+<h2>Conference Submissions </h2>
 
 
-<ul>
+<ul id="titles">
 <% titles.each do |poster_name| %>
   <a href="/poster_details/<%= poster_name["id"] %>">
-    <li><%= poster_name["title"] %> </li> 
+    <li class="poster-titles"><%= poster_name["title"] %> </li> 
     
   </a>   
 <% end %>

@@ -10,6 +10,9 @@ require_relative 'public/db/data_access.rb'
 
 enable :sessions 
 
+
+
+
 def logged_in?()
   if session[:user_id]
     true
@@ -63,6 +66,14 @@ get '/poster_details/:id' do
   erb :poster_details, locals: { posters: results[0] }
 end
 
+delete '/posters/:id' do
+ 
+  delete_poster(params['id'].to_i)
+
+  redirect 'poster_titles'
+  
+end
+
 get '/posters/upload' do 
   erb :new;
 end
@@ -76,6 +87,7 @@ post '/' do
 end
 
 post '/login' do
+
   user = find_user_by_email(params['email'])
   if BCrypt::Password.new(user['password_digest']).==(params['password'])   #assume says " BCrypt has user provided correct password?"
     session[:user_id] = user['id'] #logging the user in 

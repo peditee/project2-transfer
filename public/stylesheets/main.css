@@ -1,18 +1,76 @@
+
 body {
-  background-color: cornflowerblue;
-  font: sans-serif;
-  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  
+  /* text-align: center; */
+  background-color: lightgrey;
+
 }
 
-.heading {
-  background-color: white;
+#heading {
+  font-size: 1em !important;
+  border-bottom: solid #000;
+  border-width: 0 4;
+  margin-bottom: 5px;
+  border-color: cornflowerblue;
+  margin-left: 0;
+  margin-right: 0;
 }
 form {
   text-align: left;
 }
 
 .dynamic-data {
+  display: grid;
+  Justify-items: end;
+}
+
+h2, h1 {
+  margin: 0;
+}
+
+#titles {
+  list-style-type: none;
+  margin: 20px;
+  display: grid;
+  justify-items: start;
+  
+}
+
+.poster-titles {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.welcome-title {
   text-align: left;
 }
 
 
+#login {
+  text-align: left;
+  margin-top: 40px;
+}
+
+.login-labels div {
+  display: block;
+  text-align: right;
+}
+
+body {
+  text-align: center;
+  margin: 3px;
+}
+
+.central-content {
+  margin-left: 10px;
+}
+
+.upload-elements {
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  width: 300px; 
+  margin-top: 40px;
+  margin: 40px auto;
+}
