@@ -24,3 +24,5 @@ INSERT INTO posters (title, presentation_url, authors) VALUES ('Reasons for medi
 INSERT INTO posters (title, presentation_url, authors) VALUES ('An End-to-End Donor Repository System in an Academic Environment',  'https://www.vumc.org/chtn/sites/vumc.org.chtn/files/public_files/ILBC.png', 'Kerry Wiles');
 
   INSERT INTO posters (title, presentation_url, authors) VALUES ('Applying End-to-End Real World Process Infrastructure to Biobanking in the Academic Setting', 'https://www.vumc.org/chtn/sites/vumc.org.chtn/files/public_files/ISBER%20kerry.png', 'Kerry Wiles');
+
+ALTER TABLE posters ADD COLUMN user_id INTEGER;

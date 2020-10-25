@@ -67,11 +67,16 @@ get '/poster_details/:id' do
 end
 
 delete '/posters/:id' do
- 
-  delete_poster(params['id'].to_i)
-
-  redirect 'poster_titles'
+  user = session[:user_id] 
+  poster_id = find_poster_by_id(params['id'])['user_id'] 
   
+  if user == poster_id
+    delete_poster(params['id'].to_i)
+
+    redirect 'poster_titles'
+  else
+    redirect '/'
+  end
 end
 
 get '/posters/upload' do 
@@ -79,11 +84,11 @@ get '/posters/upload' do
 end
 
 post '/' do
-  db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'medical_conference_app'})
-  db.exec("insert into posters (title, presentation_url, authors) values ('#{params["title"]}', '#{params["presentation_url"]}', '#{params["authors"]}');")
-  db.close
+  redirect '/' unless logged_in?
+  create_poster(params['title'], params['presentation_url'], params['authors'], current_user['id'])
+  
 
-  redirect "/"
+  redirect "/poster_titles"
 end
 
 post '/login' do
@@ -93,7 +98,7 @@ post '/login' do
     session[:user_id] = user['id'] #logging the user in 
     redirect '/logged_in'
   else 
-   erb :login
+   erb :index
     
   end
 end

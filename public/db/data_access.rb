@@ -25,6 +25,11 @@ def all_posters()
   run_sql('select * from posters;')
 end
 
+def create_poster(title, presentation_url, authors, user_id)
+sql = "insert into posters (title, presentation_url, authors, user_id) values ($1, $2, $3, $4);"
+run_sql(sql, [title, presentation_url, authors, user_id])
+end
+
 def delete_poster(id)
  
   sql = 'DELETE FROM posters WHERE id = $1;'
