@@ -1,29 +1,11 @@
 
-
-
-keys
-
-Titles and internal titles
-Introduction - the project's aim
-Technologies
-Launch
-
-optional
-
-Table of contents
-Illustrations
-Scope of functionalities 
-Examples of use
-Project status 
-Sources
-Other information
  
 
 
 A Medical Conference App
 
 
-
+https://limitless-bastion-82498.herokuapp.com/?
 
 Project Aim
 
